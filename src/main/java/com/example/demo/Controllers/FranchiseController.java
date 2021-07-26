@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.models.Character;
 import com.example.demo.models.Franchise;
 import com.example.demo.models.Franchise;
 import com.example.demo.repositories.CharactersRepository;
@@ -47,6 +48,24 @@ public class FranchiseController {
         } else {
             status = HttpStatus.NOT_FOUND;
         }
+        return new ResponseEntity<>(returnFranchise, status);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Franchise> updateFranchise(@PathVariable int id, @RequestBody Franchise franchise){
+        Franchise returnFranchise = new Franchise();
+        HttpStatus status;
+        /*
+         We want to check if the request body matches what we see in the path variable.
+         This is to ensure some level of security, making sure someone
+         hasn't done some malicious stuff to our body.
+        */
+        if(id != franchise.getFranchiseId()){
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(returnFranchise,status);
+        }
+        returnFranchise = franchiseRepository.save(franchise);
+        status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);
     }
 

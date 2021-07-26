@@ -47,4 +47,21 @@ public class CharacterController {
         return new ResponseEntity<>(returnCharacter, status);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Character> updateCharacter(@PathVariable int id, @RequestBody Character character){
+        Character returnCharacter = new Character();
+        HttpStatus status;
+        /*
+         We want to check if the request body matches what we see in the path variable.
+         This is to ensure some level of security, making sure someone
+         hasn't done some malicious stuff to our body.
+        */
+        if(id != character.getCharacterId()){
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(returnCharacter,status);
+        }
+        returnCharacter = charactersRepository.save(character);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(returnCharacter, status);
+    }
 }
