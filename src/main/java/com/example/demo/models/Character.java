@@ -31,7 +31,12 @@ public class Character {
     @Column(name="Picture")
     private String picture;
 
-    @ManyToMany(mappedBy="characters")
+    @ManyToMany
+    @JoinTable(
+            name="character_movie",
+            joinColumns={@JoinColumn(name="character_id")},
+            inverseJoinColumns={@JoinColumn(name="movie_id")}
+    )
     public List<Movie> movies = new ArrayList<>();
 
     @JsonGetter("movies")

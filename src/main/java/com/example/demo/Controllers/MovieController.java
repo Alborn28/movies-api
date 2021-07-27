@@ -65,4 +65,16 @@ public class MovieController {
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnMovie, status);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Movie> deleteMovie(@PathVariable int id) {
+        HttpStatus status = null;
+        if (moviesRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            moviesRepository.deleteById(id);
+        } else {
+            status = HttpStatus.NO_CONTENT;
+        }
+
+        return new ResponseEntity<>(status);
+    }
 }

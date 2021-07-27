@@ -46,7 +46,7 @@ public class Movie {
     @JsonGetter("franchise")
     public String franchise() {
         if(franchise != null){
-            return "/api/v1/authors/" + franchise.getFranchiseId();
+            return "/api/v1/franchises/" + franchise.getFranchiseId();
         }else{
             return null;
         }

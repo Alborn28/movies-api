@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.models.Character;
 import com.example.demo.models.Franchise;
 import com.example.demo.models.Franchise;
+import com.example.demo.models.Movie;
 import com.example.demo.repositories.CharactersRepository;
 import com.example.demo.repositories.FranchiseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,24 @@ public class FranchiseController {
         returnFranchise = franchiseRepository.save(franchise);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Franchise> deleteFranchise(@PathVariable int id) {
+        // Character returnCharacter = new Character();
+        HttpStatus status = null;
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            Franchise franchise = franchiseRepository.getById(id);
+            for(Movie movie : franchise.getMovies()) {
+                movie.setFranchise(null);
+            }
+
+            franchiseRepository.deleteById(id);
+        } else {
+            status = HttpStatus.NO_CONTENT;
+        }
+
+        return new ResponseEntity<>(status);
     }
 
 }
