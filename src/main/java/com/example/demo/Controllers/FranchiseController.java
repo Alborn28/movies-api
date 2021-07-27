@@ -2,15 +2,15 @@ package com.example.demo.Controllers;
 
 import com.example.demo.models.Character;
 import com.example.demo.models.Franchise;
-import com.example.demo.models.Franchise;
 import com.example.demo.models.Movie;
-import com.example.demo.repositories.CharactersRepository;
 import com.example.demo.repositories.FranchiseRepository;
+import com.example.demo.repositories.MoviesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,7 +19,8 @@ import java.util.List;
 @RequestMapping("/api/v1/franchises")
 public class FranchiseController {
 
-
+    @Autowired
+    private MoviesRepository moviesRepository;
 
     @Autowired
     private FranchiseRepository franchiseRepository;
@@ -88,4 +89,62 @@ public class FranchiseController {
         return new ResponseEntity<>(status);
     }
 
+    @PutMapping("UpdateMovies/{id}")
+    public ResponseEntity<Franchise> updateMovies(@PathVariable int id, @RequestBody List<Integer> array){
+        HttpStatus status=null;
+        Franchise franchise= new Franchise();
+        if (franchiseRepository.existsById(id)){
+            status = HttpStatus.OK;
+            franchise=franchiseRepository.findById(id).get();
+
+            ArrayList<Movie> movies = new ArrayList<>();
+            for(int movieId : array) {
+                Movie movie = moviesRepository.getById(movieId);
+                movies.add(movie);
+                movie.setFranchise(franchise);
+                moviesRepository.save(movie);
+            }
+
+            franchise.setMovies(movies);
+
+            franchiseRepository.save(franchise);
+        }
+        else {
+            status = HttpStatus.BAD_REQUEST;
+        }
+
+        return new ResponseEntity<>(franchise,status);
+    }
+
+    @GetMapping("/movies/{id}")
+    public ResponseEntity<List<Movie>> getMovies(@PathVariable int id){
+        List<Movie> returnList = new ArrayList<>();
+        HttpStatus status;
+        // We first check if the Book exists, this saves some computing time.
+        if(franchiseRepository.existsById(id)){
+            status = HttpStatus.OK;
+            returnList = franchiseRepository.findById(id).get().getMovies();
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(returnList, status);
+    }
+
+    @GetMapping("/characters/{id}")
+    public ResponseEntity<List<Character>> getCharacters(@PathVariable int id){
+        List<Character> returnList = new ArrayList<>();
+        HttpStatus status;
+        // We first check if the Book exists, this saves some computing time.
+        if(franchiseRepository.existsById(id)){
+            status = HttpStatus.OK;
+            List<Movie> movies = franchiseRepository.findById(id).get().getMovies();
+
+            for(Movie movie : movies) {
+                returnList.addAll(movie.getCharacters());
+            }
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(returnList, status);
+    }
 }
