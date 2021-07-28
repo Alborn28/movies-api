@@ -33,6 +33,10 @@ public class Character {
     @Column(name="Picture")
     private String picture;
 
+    /**
+     * A character can be related to several movies.
+     * Thus a linking is created based on the PK in the characters table and FK in the movie table.
+     */
     @ManyToMany
     @JoinTable(
             name="character_movie",
@@ -41,6 +45,10 @@ public class Character {
     )
     public List<Movie> movies = new ArrayList<>();
 
+    /**
+     * if a character is related to a movie or several movies, the references to movies are returned in a list based on the ID of the movie.
+     * @return a list of references to the connected movies.
+     */
     @JsonGetter("movies")
     public List<String> movies() {
         if(movies != null){

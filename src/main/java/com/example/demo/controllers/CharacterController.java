@@ -17,6 +17,11 @@ public class CharacterController {
     @Autowired
     private CharactersRepository charactersRepository;
 
+    /**
+     * Adds a single character in the DB
+     * @param character modell to be added
+     * @return ResponsEntity with the modell added and a respons code 201.
+     */
     @PostMapping
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character returnCharacter = charactersRepository.save(character);
@@ -24,6 +29,10 @@ public class CharacterController {
         return new ResponseEntity<>(returnCharacter, status);
     }
 
+    /**
+     *
+     * @return a list of all the characters in the DB.
+     */
     @GetMapping()
     public ResponseEntity<List<Character>> getAllCharacters() {
         List<Character> characters = charactersRepository.findAll();
@@ -31,6 +40,11 @@ public class CharacterController {
         return new ResponseEntity<>(characters, status);
     }
 
+    /**
+     *
+     * @param id the parameter used to idenitfy the exact row in the table.
+     * @return a single character based on the ID.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Character> getCharacter(@PathVariable int id) {
         Character returnCharacter = new Character();
@@ -45,6 +59,12 @@ public class CharacterController {
         return new ResponseEntity<>(returnCharacter, status);
     }
 
+    /**
+     *
+     * @param id the parameter used to idenitfy the exact row in the table.
+     * @param character the model used to update the existing row in the table
+     * @return ResponsEntity with the modell updated and a response code 204.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Character> updateCharacter(@PathVariable int id, @RequestBody Character character) {
         Character returnCharacter = new Character();
@@ -63,6 +83,12 @@ public class CharacterController {
         return new ResponseEntity<>(returnCharacter, status);
     }
 
+    /**
+     *
+     * @param id the parameter used to idenitfy the exact row in the table.
+     * The method deletes a character from the table.
+     * @return a response code 204.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Character> deleteCharacter(@PathVariable int id) {
         // Character returnCharacter = new Character();

@@ -38,11 +38,18 @@ public class Movie {
     @Column(name="Trailer")
     private String trailer;
 
-
+    /**
+     * A movie can be related to a franchise
+     * Thus a link is created based on the PK in the franchise table and FK in the movie table
+     */
     @ManyToOne
     @JoinColumn(name="franchise_id")
     private Franchise franchise;
 
+    /**
+     * A movie is related to a franchise, the reference to the franchise is returned as a object based on the ID of the franchised.
+     * @return a URL of the reference to the connected franchise
+     */
     @JsonGetter("franchise")
     public String franchise() {
         if(franchise != null){
@@ -51,7 +58,10 @@ public class Movie {
             return null;
         }
     }
-
+    /**
+     * A movie can be related to several characters.
+     * Thus a link is created based on the PK in the movie table and FK in the character table.
+     */
     @ManyToMany
     @JoinTable(
             name="character_movie",
@@ -60,12 +70,15 @@ public class Movie {
     )
     public List<Character> characters = new ArrayList<>();
 
+    /**
+     * if a movie is related to a character or several characters, the references to characters are returned in a list based on the ID of the characters.
+     * @return a list of references to the connected characters.
+     */
     @JsonGetter("characters")
     public List<String> characters() {
         if (characters == null) {
             return null;
         }
-
         return characters.stream()
                 .map(character -> {
                     return "/api/v1/characters/" + character.getCharacterId();

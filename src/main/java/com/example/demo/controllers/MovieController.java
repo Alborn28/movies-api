@@ -24,6 +24,11 @@ public class MovieController {
     @Autowired
     private CharactersRepository charactersRepository;
 
+    /**
+     * Adds a single movie in the DB
+     * @param movie model to be added
+     * @return ResponseEntity with the model added and a response code 201.
+     */
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
         Movie returnMovie = moviesRepository.save(movie);
@@ -31,6 +36,10 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
+    /**
+     *
+     * @return a list of all the movies in the DB.
+     */
     @GetMapping()
     public ResponseEntity<List<Movie>> getAllMovies(){
         List<Movie> movies = moviesRepository.findAll();
@@ -39,15 +48,13 @@ public class MovieController {
     }
 
 
-
-    @GetMapping("/{id}")
-
-    public ResponseEntity<Movie> getMovie(@PathVariable int id){
-        /**
-     * Detta är en förklaring
-     * @param id
-     * @return
+    /**
+     *
+     * @param id the parameter used to idenitfy the exact row in the table.
+     * @return a single movie based on the ID.
      */
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> getMovie(@PathVariable int id){
         Movie returnMovie = new Movie();
         HttpStatus status;
         // We first check if the Book exists, this saves some computing time.
@@ -59,7 +66,12 @@ public class MovieController {
         }
         return new ResponseEntity<>(returnMovie, status);
     }
-
+    /**
+     *
+     * @param id the parameter used to idenitfy the exact row in the table.
+     * @param movie the model used to update the existing row in the table
+     * @return ResponseEntity with the model updated and a response code 204.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie){
         Movie returnMovie = new Movie();
@@ -78,6 +90,13 @@ public class MovieController {
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnMovie, status);
     }
+
+    /**
+     *
+     * @param id the parameter used to idenitfy the exact row in the table.
+     * The method deletes a movie from the table.
+     * @return a response code 204.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteMovie(@PathVariable int id) {
         HttpStatus status = null;
@@ -91,6 +110,14 @@ public class MovieController {
         return new ResponseEntity<>(status);
     }
 
+    /**
+     *
+     * @param id the parameter used to identify the exact row in the movie table.
+     * @param array the array of characters to be added to this movie.
+     * A movie object is instantiated and all the characters to be related to the movie are added to a list.
+     * The list is then in turn added to the movie table.
+     * @return ResponseEntity with the model updated and a response code 200.
+     */
     @PutMapping("UpdateCharacters/{id}")
     public ResponseEntity<Movie> updateCharacters(@PathVariable int id, @RequestBody List<Integer> array){
         HttpStatus status=null;
@@ -115,6 +142,11 @@ public class MovieController {
         return new ResponseEntity<>(movie,status);
     }
 
+    /**
+     *
+     * @param id the parameter used to identify the exact row in the movie table.
+     * @return returns a list of all the characters related to the movie of the given ID.
+     */
     @GetMapping("/characters/{id}")
     public ResponseEntity<List<Character>> getCharacters(@PathVariable int id){
         List<Character> returnList = new ArrayList<>();

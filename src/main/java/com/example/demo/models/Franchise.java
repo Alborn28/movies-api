@@ -23,9 +23,16 @@ public class Franchise {
     @Column(name="Description")
     private String description;
 
+    /**
+     * A franchise can be related to several movies.
+     * Thus a link is created based on PK of the franchise and FK in the movie table.
+     */
     @OneToMany(mappedBy = "franchise")
     private List<Movie> movies = new ArrayList<>();
-
+    /**
+     * if a franchise is related to a movie or several movies, the references to movies are returned in a list based on the ID of the movies.
+     * @return a list of references to the connected movies.
+     */
     @JsonGetter("movies")
     public List<String> movies() {
         return movies.stream()
