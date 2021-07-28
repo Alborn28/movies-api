@@ -133,7 +133,10 @@ public class MovieController {
         //Loop through the characterIds, retrieve the Characters with those id:s and add them to a list
         ArrayList<Character> characters = new ArrayList<>();
         for (int characterId : characterIds) {
-            characters.add(characterRepository.getById(characterId));
+            //Check so a character exists with that id
+            if(characterRepository.existsById(characterId)) {
+                characters.add(characterRepository.getById(characterId));
+            }
         }
 
         //Add the Characters to the Movie

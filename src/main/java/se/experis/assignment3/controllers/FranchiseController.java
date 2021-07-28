@@ -142,10 +142,13 @@ public class FranchiseController {
         //Loop through the movieIds, retrieve the Movies with those id:s and add them to a list
         ArrayList<Movie> movies = new ArrayList<>();
         for (int movieId : movieIds) {
-            Movie movie = movieRepository.getById(movieId);
-            movies.add(movie);
-            movie.setFranchise(franchise);
-            movieRepository.save(movie);
+            //Check so a movie exists with that id
+            if(movieRepository.existsById(movieId)) {
+                Movie movie = movieRepository.getById(movieId);
+                movies.add(movie);
+                movie.setFranchise(franchise);
+                movieRepository.save(movie);
+            }
         }
 
         //Add the Movies to the Franchise
