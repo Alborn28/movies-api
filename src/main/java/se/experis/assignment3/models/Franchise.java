@@ -15,9 +15,8 @@ public class Franchise {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int franchiseId;
 
-    @Column(name="Name",length = 50)
+    @Column(name="Name",length = 50, nullable = false)
     private String name;
-
 
     @Column(name="Description")
     private String description;
@@ -28,6 +27,7 @@ public class Franchise {
      */
     @OneToMany(mappedBy = "franchise")
     private List<Movie> movies = new ArrayList<>();
+
     /**
      * if a franchise is related to a movie or several movies, the references to movies are returned in a list based on the ID of the movies.
      * @return a list of references to the connected movies.

@@ -16,7 +16,7 @@ public class Character {
     private int characterId;
 
 
-    @Column(name="Full_Name",length = 50)
+    @Column(name="Full_Name",length = 50, nullable = false)
     private String fullName;
 
 
@@ -57,7 +57,6 @@ public class Character {
         }
         return null;
     }
-
 
     public int getCharacterId() {
         return characterId;

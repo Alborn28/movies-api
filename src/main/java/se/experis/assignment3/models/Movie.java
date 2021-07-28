@@ -15,13 +15,11 @@ public class Movie {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int movieId;
 
-    @Column(name="Title",length = 50)
+    @Column(name="Title",length = 50, nullable = false)
     private String title;
-
 
     @Column(name="Genre",length = 50)
     private String genre;
-
 
     @Column(name="Release_Year")
     private int releaseYear;
@@ -31,7 +29,6 @@ public class Movie {
 
     @Column(name="Picture")
     private String picture;
-
 
     @Column(name="Trailer")
     private String trailer;
@@ -56,6 +53,7 @@ public class Movie {
             return null;
         }
     }
+
     /**
      * A movie can be related to several characters.
      * Thus a link is created based on the PK in the movie table and FK in the character table.
@@ -82,8 +80,6 @@ public class Movie {
                     return "/api/v1/characters/" + character.getCharacterId();
                 }).collect(Collectors.toList());
     }
-
-
 
     public int getMovieId() {
         return movieId;

@@ -18,7 +18,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/franchises")
 public class FranchiseController {
-
     @Autowired
     private MovieRepository movieRepository;
 

@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/v1/movies")
 
 public class MovieController {
-
     @Autowired
     private MovieRepository movieRepository;
 

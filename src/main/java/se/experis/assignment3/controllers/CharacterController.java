@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/characters")
 public class CharacterController {
-
     @Autowired
     private CharacterRepository characterRepository;
 
