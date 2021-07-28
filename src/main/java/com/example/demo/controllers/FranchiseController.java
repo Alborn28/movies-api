@@ -1,4 +1,4 @@
-package com.example.demo.Controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.models.Character;
 import com.example.demo.models.Franchise;
@@ -43,7 +43,6 @@ public class FranchiseController {
     public ResponseEntity<Franchise> getFranchise(@PathVariable int id){
         Franchise returnFranchise = new Franchise();
         HttpStatus status;
-        // We first check if the Book exists, this saves some computing time.
         if(franchiseRepository.existsById(id)){
             status = HttpStatus.OK;
             returnFranchise = franchiseRepository.findById(id).get();

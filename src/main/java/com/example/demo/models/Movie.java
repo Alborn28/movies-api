@@ -17,18 +17,18 @@ public class Movie {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int movieId;
 
-    @Column(name="Title")
+    @Column(name="Title",length = 50)
     private String title;
 
 
-    @Column(name="Genre")
+    @Column(name="Genre",length = 50)
     private String genre;
 
 
     @Column(name="Release_Year")
     private int releaseYear;
 
-    @Column(name="Director")
+    @Column(name="Director",length = 50)
     private String director;
 
     @Column(name="Picture")
@@ -51,7 +51,6 @@ public class Movie {
             return null;
         }
     }
-
 
     @ManyToMany
     @JoinTable(

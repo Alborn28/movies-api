@@ -1,7 +1,6 @@
-package com.example.demo.Controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.models.Character;
-import com.example.demo.models.Movie;
 import com.example.demo.models.Movie;
 import com.example.demo.repositories.CharactersRepository;
 import com.example.demo.repositories.MoviesRepository;
@@ -39,8 +38,16 @@ public class MovieController {
         return new ResponseEntity<>(movies,status);
     }
 
+
+
     @GetMapping("/{id}")
+
     public ResponseEntity<Movie> getMovie(@PathVariable int id){
+        /**
+     * Detta är en förklaring
+     * @param id
+     * @return
+     */
         Movie returnMovie = new Movie();
         HttpStatus status;
         // We first check if the Book exists, this saves some computing time.

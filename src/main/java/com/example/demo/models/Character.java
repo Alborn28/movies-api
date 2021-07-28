@@ -3,6 +3,7 @@ package com.example.demo.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -17,14 +18,15 @@ public class Character {
     private int characterId;
 
 
-    @Column(name="Full_Name")
+    @Column(name="Full_Name",length = 50)
     private String fullName;
 
 
-    @Column(name="Alias")
+    @Column(name="Alias",length = 20)
     private String alias;
 
-    @Column(name="Gender")
+
+    @Column(name="Gender",length = 10)
     private String gender;
 
 

@@ -1,4 +1,4 @@
-package com.example.demo.Controllers;
+package com.example.demo.controllers;
 
 import com.example.demo.models.Character;
 import com.example.demo.repositories.CharactersRepository;
