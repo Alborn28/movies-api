@@ -1,7 +1,0 @@
-package com.example.demo.repositories;
-
-import com.example.demo.models.Character;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface CharactersRepository extends JpaRepository<Character,Integer> {
-}

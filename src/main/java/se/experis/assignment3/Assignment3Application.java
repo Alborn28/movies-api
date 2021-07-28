@@ -1,13 +1,13 @@
-package com.example.demo;
+package se.experis.assignment3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Demo1Application {
+public class Assignment3Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Demo1Application.class, args);
+        SpringApplication.run(Assignment3Application.class, args);
     }
 
 }

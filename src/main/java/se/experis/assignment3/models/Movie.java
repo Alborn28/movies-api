@@ -1,12 +1,10 @@
-package com.example.demo.models;
+package se.experis.assignment3.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
