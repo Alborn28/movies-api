@@ -9,8 +9,10 @@ import se.experis.assignment3.repositories.FranchiseRepository;
 import se.experis.assignment3.repositories.MovieRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * A class to seed some initial data into the database.
+ */
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -24,7 +26,7 @@ public class DataLoader implements ApplicationRunner {
     private FranchiseRepository franchiseRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         //Only fill the database with data if it is empty
         if(characterRepository.findAll().size() != 0 && movieRepository.findAll().size() != 0 && franchiseRepository.findAll().size() != 0) {
             return;
