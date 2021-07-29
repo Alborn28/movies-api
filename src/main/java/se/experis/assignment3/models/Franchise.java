@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name="Franchise")
+@Table(name="franchise")
 public class Franchise {
 
     @javax.persistence.Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int franchiseId;
 
-    @Column(name="Name",length = 50, nullable = false)
+    @Column(name="name",length = 50, nullable = false)
     private String name;
 
-    @Column(name="Description")
+    @Column(name="description")
     private String description;
 
     /**
@@ -38,6 +38,14 @@ public class Franchise {
                 .map(movie -> {
                     return "/api/v1/movies/" + movie.getMovieId();
                 }).collect(Collectors.toList());
+    }
+
+    public Franchise() {
+    }
+
+    public Franchise(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public int getFranchiseId() {

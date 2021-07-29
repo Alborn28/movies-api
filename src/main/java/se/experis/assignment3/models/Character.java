@@ -16,19 +16,19 @@ public class Character {
     private int characterId;
 
 
-    @Column(name="Full_Name",length = 50, nullable = false)
+    @Column(name="full_name",length = 50, nullable = false)
     private String fullName;
 
 
-    @Column(name="Alias",length = 20)
+    @Column(name="alias",length = 20)
     private String alias;
 
 
-    @Column(name="Gender",length = 10)
+    @Column(name="gender",length = 10)
     private String gender;
 
 
-    @Column(name="Picture")
+    @Column(name="picture")
     private String picture;
 
     /**
@@ -56,6 +56,16 @@ public class Character {
                     }).collect(Collectors.toList());
         }
         return null;
+    }
+
+    public Character() {
+    }
+
+    public Character(String fullName, String alias, String gender, String picture) {
+        this.fullName = fullName;
+        this.alias = alias;
+        this.gender = gender;
+        this.picture = picture;
     }
 
     public int getCharacterId() {

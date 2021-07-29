@@ -15,22 +15,22 @@ public class Movie {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int movieId;
 
-    @Column(name="Title",length = 50, nullable = false)
+    @Column(name="title",length = 50, nullable = false)
     private String title;
 
-    @Column(name="Genre",length = 50)
+    @Column(name="genre",length = 50)
     private String genre;
 
-    @Column(name="Release_Year")
+    @Column(name="release_year")
     private int releaseYear;
 
-    @Column(name="Director",length = 50)
+    @Column(name="director",length = 50)
     private String director;
 
-    @Column(name="Picture")
+    @Column(name="picture")
     private String picture;
 
-    @Column(name="Trailer")
+    @Column(name="trailer")
     private String trailer;
 
     /**
@@ -79,6 +79,18 @@ public class Movie {
                 .map(character -> {
                     return "/api/v1/characters/" + character.getCharacterId();
                 }).collect(Collectors.toList());
+    }
+
+    public Movie() {
+    }
+
+    public Movie(String title, String genre, int releaseYear, String director, String picture, String trailer) {
+        this.title = title;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.director = director;
+        this.picture = picture;
+        this.trailer = trailer;
     }
 
     public int getMovieId() {
